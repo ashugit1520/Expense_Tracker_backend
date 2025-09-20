@@ -26,7 +26,7 @@ const authLogin = async (req, res) => {
     res
       .cookie("access_token", token, {
         httpOnly: true,
-         secure: process.env.NODE_ENV === "production",
+         secure: true,
         sameSite: "none", 
         maxAge: 24 * 60 * 60 * 1000, 
         path: "/",
@@ -41,7 +41,7 @@ const authLogin = async (req, res) => {
 const authLogOut = (req, res) => {
   res.clearCookie("access_token", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+       secure: true,
     sameSite: "none",
     path: "/",
   });
