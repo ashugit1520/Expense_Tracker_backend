@@ -25,7 +25,7 @@ const authLogin = async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             maxAge: 3600000,
-            sameSite: 'Lax',
+            sameSite: 'none',
             path: '/'
         })
             .status(200)
@@ -41,7 +41,7 @@ const authLogOut = (req, res) => {
     res.clearCookie('access_token', {
         httpOnly: true,
         secure: true,
-        sameSite: 'strict',
+      sameSite: 'none',
         path: '/',
     });
     res.status(200).json({ message: 'Logged out successfully' });
