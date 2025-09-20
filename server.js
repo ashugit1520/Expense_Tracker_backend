@@ -11,9 +11,10 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: process.env.CLIENT_URL || "https://expense-tracker-frontend-qs4p.vercel.app",
   credentials: true, 
 }));
+
 
 app.use(express.json());
 app.use(cookieParser());
