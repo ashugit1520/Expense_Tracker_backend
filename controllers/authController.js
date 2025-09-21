@@ -28,7 +28,7 @@ const authLogin = async (req, res) => {
         httpOnly: true,
          secure: true,
         sameSite: "none", 
-        maxAge: 3600000, 
+         maxAge: 1000 * 60 * 60* 24,
        domain: ".onrender.com",
         path: "/",
       })
