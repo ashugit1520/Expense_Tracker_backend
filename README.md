@@ -82,7 +82,7 @@ Create a `.env` file in the root and add:
 
 ```env
 PORT=3001
-MONGO_URI=your_mongodb_connection_string
+DB_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
 ```
 
@@ -182,8 +182,4 @@ Perfect! You can add the **API Endpoints section** directly to your backend READ
 ## License
 This project is for educational purposes and personal portfolio use.
 
-
-If you want, I can also make a **combined “Full-Stack README”** that references both frontend and backend repos with setup instructions, so your GitHub portfolio looks very professional.  
-
-Do you want me to make that?
 ```
