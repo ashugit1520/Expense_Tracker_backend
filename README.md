@@ -3,8 +3,7 @@
 
 This is the **backend** of the Personal Expense Tracker web application. It provides a **RESTful API** for user authentication and expense management. The backend is built with **Node.js**, **Express.js**, and **MongoDB**.
 
-The backend is deployed on **render**: [Live API Link]((https://expense-tracker-backend-1a2x.onrender.com))
-
+The backend is deployed on **render**: https://expense-tracker-backend-1a2x.onrender.com
 ---
 
 ## Features
