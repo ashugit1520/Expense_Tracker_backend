@@ -6,46 +6,40 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const authLogin = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
 
-    if (!user) {
-      return res.status(401).json({ error: "Authentication failed" });
+        if (!user) {
+            return res.status(401).json({ error: "Authentication failed" });
+        }
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return res.status(401).json({ error: "Authentication failed" });
+        }
+
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1h",
+        });
+
+        res.status(200).json({
+            message: "Logged in successfully",
+            token: token
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Login failed" });
     }
-
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) {
-      return res.status(401).json({ error: "Authentication failed" });
-    }
-
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-console.log("Setting cookie with maxAge:", 1000 * 60 * 60 * 24);
-    res
-      .cookie("access_token", token, {
-        httpOnly: true,
-         secure: true,
-        sameSite: "none", 
-         maxAge: 1000 * 60 * 60* 24,
-        path: "/",
-      })
-      .status(200)
-      .json({ message: "Logged in successfully" });
-  } catch (error) {
-    res.status(500).json({ error: "Login failed" });
-  }
 };
 
 const authLogOut = (req, res) => {
-  res.clearCookie("access_token", {
-    httpOnly: true,
-       secure: true,
-    sameSite: "none",
-    path: "/",
-  });
-  res.status(200).json({ message: "Logged out successfully" });
+    res.clearCookie("access_token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/",
+    });
+    res.status(200).json({ message: "Logged out successfully" });
 };
 
 export { authLogin, authLogOut };
