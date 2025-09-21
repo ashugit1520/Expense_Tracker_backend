@@ -22,7 +22,7 @@ const authLogin = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-
+console.log("Setting cookie with maxAge:", 1000 * 60 * 60 * 24);
     res
       .cookie("access_token", token, {
         httpOnly: true,
