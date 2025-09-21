@@ -29,7 +29,6 @@ const authLogin = async (req, res) => {
          secure: true,
         sameSite: "none", 
          maxAge: 1000 * 60 * 60* 24,
-       domain: ".onrender.com",
         path: "/",
       })
       .status(200)
@@ -44,7 +43,6 @@ const authLogOut = (req, res) => {
     httpOnly: true,
        secure: true,
     sameSite: "none",
-     domain: ".onrender.com",
     path: "/",
   });
   res.status(200).json({ message: "Logged out successfully" });
